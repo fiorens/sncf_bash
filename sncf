@@ -102,10 +102,10 @@ do
 		
 	Heures=$(date '+%H%M')
 
-        if [ $Heures -ge 0700 ] && [ $Heures -le 2200 ] ; then
+        if [ $Heures -ge 0700 ] && [ $Heures -le 1000 ] ; then
 		Recup
 		Test_Recup
 	fi
 
-	sleep 2
+	sleep 1m
 done
