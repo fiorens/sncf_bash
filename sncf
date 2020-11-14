@@ -41,12 +41,12 @@ Recup(){
 	Train1=$(curl -s $Chaine | jq '.journeys[0].status')
 	Train2=$(curl -s $Chaine | jq '.journeys[1].status')
 	Train3=$(curl -s $Chaine | jq '.journeys[2].status')
-	echo "$Train1 $Train2 $Train3"
+	#echo "$Train1 $Train2 $Train3"
 
 }
 
 Test_Recup(){
-
+	
 	if [ $Train1 = "\"SIGNIFICANT_DELAYS\"" ] ; then
         Retard=1
 	fi
@@ -73,54 +73,39 @@ Test_Recup(){
 
 
 	if [ $Retard = 0 ] && [ $Annul = 0 ] ; then
-	gpio write 3 1
+	echo "VERT" > etat
 	fi
 
 	if [ $Retard = 1 ] ; then
-        gpio write 2 1
+        echo "ORANGE" > etat
 	fi
 
         if [ $Annul = 1 ] ; then
-        gpio write 0 1
+        echo "ROUGE" > etat
         fi
 
 }
 
-Arret_LED(){
-
-	gpio write 0 0
-	gpio write 2 0
-	gpio write 3 0
-}
-
-Init_LED() {
-	
-	gpio mode 0 out
-	gpio mode 2 out
-	gpio mode 3 out
-}
 
 
 TestAppli
 Date_ajd
 Variable
-Init_LED
+PID=$$ ; echo $PID > PID
 
 
 while [ : ]
 do
 
-	Arret_LED
 	Retard=0
 	Annul=0
-	date
-	
+		
 	Heures=$(date '+%H%M')
 
-        if [ $Heures -ge 0700 ] && [ $Heures -le 1000 ] ; then
+        if [ $Heures -ge 0700 ] && [ $Heures -le 2200 ] ; then
 		Recup
 		Test_Recup
 	fi
 
-	sleep 5m
+	sleep 2
 done

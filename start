@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#import bashsimplecurses
+source $(dirname $0)/bashsimplecurses/simple_curses.sh
+
+
+main(){
+	statut=$(cat etat)
+    	
+if [ $statut = "ROUGE" ] ; then 	
+	window "Controle des trains" "red" "100%"
+    	append "UN TRAIN A ETE ANNULE"
+    	endwin
+fi
+
+if [ $statut = "ORANGE" ] ; then
+        window "Controle des trains" "orange" "100%"
+        append "UN TRAIN EST EN RETARD"
+        endwin
+fi
+
+if [ $statut = "VERT" ] ; then
+        window "Controle des trains" "green" "100%"
+        append "Aucun probleme de train"
+        endwin
+fi
+
+
+
+}
+main_loop
