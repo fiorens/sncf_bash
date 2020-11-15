@@ -27,6 +27,11 @@ if [ $statut = "VERT" ] ; then
         endwin
 fi
 
+
+    window "Heure" "blue" "50%"
+    append "`date '+%H : %M'`"
+    endwin
+
     window "GMAIL" "blue" "100%"
     append_file "gmail"
     endwin

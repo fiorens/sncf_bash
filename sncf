@@ -10,6 +10,7 @@ TestAppli() {
 		echo 'Error : jq is not installed.' >&2
 		exit 1
 	fi	
+
 }
 
 Date_ajd() {
@@ -95,6 +96,7 @@ Gmail(){
 	curl -u $gmail_username:$gmail_password --silent "https://mail.google.com/mail/feed/atom" |  grep -oPm1 "(?<=<title>)[^<]+" | sed '1d' > gmail
 }
 
+
 TestAppli
 Date_ajd
 Variable
@@ -107,13 +109,13 @@ do
 	Retard=0
 	Annul=0
 		
-	Heures=$(date '+%H%M')
+	#Heures=$(date '+%H%M')
 
-        if [ $Heures -ge 0700 ] && [ $Heures -le 2200 ] ; then
+        #if [ $Heures -ge 0700 ] && [ $Heures -le 2200 ] ; then
 		Recup
 		Test_Recup
 		Gmail
-	fi
+	#fi
 
 	sleep 1m
 done
