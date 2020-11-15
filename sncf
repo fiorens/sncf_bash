@@ -31,6 +31,10 @@ Partie1="https://"
 Partie2="@api.sncf.com/v1/coverage/sncf/journeys?from=stop_area%3AOCE%3ASA%3A87723718&to=stop_area%3AOCE%3ASA%3A87723197&datetime="
 Partie3="T073000&datetime_represents=departure&min_nb_journeys=3&"
 Chaine=$Partie1$Token_api$Partie2$Partie3
+
+gmail_username=$(cat user.gmail)
+gmail_password=$(cat token.gmail)
+
 }
 
 Recup(){
@@ -87,6 +91,9 @@ Test_Recup(){
 }
 
 
+Gmail(){
+	curl -u $gmail_username:$gmail_password --silent "https://mail.google.com/mail/feed/atom" |  grep -oPm1 "(?<=<title>)[^<]+" | sed '1d' > gmail
+}
 
 TestAppli
 Date_ajd
@@ -102,9 +109,10 @@ do
 		
 	Heures=$(date '+%H%M')
 
-        if [ $Heures -ge 0700 ] && [ $Heures -le 1000 ] ; then
+        if [ $Heures -ge 0700 ] && [ $Heures -le 2200 ] ; then
 		Recup
 		Test_Recup
+		Gmail
 	fi
 
 	sleep 1m

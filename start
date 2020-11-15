@@ -27,6 +27,10 @@ if [ $statut = "VERT" ] ; then
         endwin
 fi
 
+    window "GMAIL" "blue" "100%"
+    append_file "gmail"
+    endwin
+
 
 }
 main_loop
