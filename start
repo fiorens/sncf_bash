@@ -32,8 +32,9 @@ fi
     append "`date '+%H : %M'`"
     endwin
 
+    cat gmail | head -n 7 > gmailf
     window "GMAIL" "blue" "100%"
-    append_file "gmail"
+    append_file "gmailf"
     endwin
 
 
